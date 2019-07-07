@@ -17,3 +17,12 @@ MVP
 [ ] Paint individual grid squares
 [ ] Grid square grouping
 [ ] Show/hide grid squares
+[ ] Save/load
+
+
+Menu actions
+* Load image
+* Set grid
+* Paint tool
+* Group tool
+
