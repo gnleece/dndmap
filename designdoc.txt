@@ -1,0 +1,19 @@
+DM feature request:
+"Probably load an image, jpg and png at least, but PDF would be nice too
+Then allow me to define/scale a grid of squares on top of that image
+And I can then “paint” to fill in those grids with black
+And there should be some way to group the squares together, maybe the lightest weight version is just per stroke
+All this should work with touch only on Windows
+Which is to say you could use a mouse too but it should be doable using only touch
+And then there’d need to be a way to hide groups one at a time, like with a double tap, or a tap and hold, or a fly out menu
+It’d be cool if there could be a selection mechanic
+That could be used to select individual squares and group them, and then also select groups and un-group or reveal them
+Oh and all this should be on a sort of zoomable, scrollable canvas"
+
+MVP
+[ ] Load image files at runtime
+[ ] Pinch-to-zoom & scrollable canvas
+[ ] Grid with custom scale
+[ ] Paint individual grid squares
+[ ] Grid square grouping
+[ ] Show/hide grid squares
