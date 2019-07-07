@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer output;
+    private SpriteRenderer output = null;
 
     public void Button_LoadImage()
     {
@@ -15,14 +16,31 @@ public class MainMenu : MonoBehaviour
         var paths = StandaloneFileBrowser.OpenFilePanel("Title", "", "jpg", false);
         if (paths.Length > 0)
         {
-            StartCoroutine(OutputRoutine(new System.Uri(paths[0]).AbsoluteUri));
+            StartCoroutine(LoadMapTexture(new System.Uri(paths[0]).AbsoluteUri));
         }
     }
 
-    private IEnumerator OutputRoutine(string url)
+    public void Button_SetGrid()
     {
-        var loader = new WWW(url);
-        yield return loader;
-        output.sprite = Sprite.Create(loader.texture, new Rect(0,0, loader.texture.width, loader.texture.height), new Vector2(0.5f, 0.5f));
+        Debug.Log("Set grid");
+    }
+
+    private IEnumerator LoadMapTexture(string url)
+    {
+        using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+        {
+            yield return uwr.SendWebRequest();
+
+            if (uwr.isNetworkError || uwr.isHttpError)
+            {
+                Debug.Log(uwr.error);
+            }
+            else
+            {
+                // Get downloaded asset bundle
+                var texture = DownloadHandlerTexture.GetContent(uwr);
+                output.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            }
+        }
     }
 }
